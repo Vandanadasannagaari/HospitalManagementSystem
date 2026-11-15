@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patients</title><link rel="stylesheet" th:href="@{/css/style.css}"></head><body>
+<header class="topbar"><h2>CarePoint Hospital</h2><span>Patient Management</span></header><div class="layout">
+<nav class="sidebar"><a th:href="@{/}">Dashboard</a><a class="active" th:href="@{/patients}">Patients</a><a th:href="@{/doctors}">Doctors</a><a th:href="@{/appointments}">Appointments</a><a th:href="@{/bills}">Billing</a></nav>
+<main class="content"><div class="heading"><div><h1>Patients</h1><p class="muted">Manage patient records</p></div><a class="btn" th:href="@{/patients/new}">+ Add Patient</a></div>
+<div class="panel table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Phone</th><th>Address</th><th>Actions</th></tr></thead>
+<tbody><tr th:each="p : ${patients}"><td th:text="${p.id}"></td><td th:text="${p.name}"></td><td th:text="${p.age}"></td><td th:text="${p.gender}"></td><td th:text="${p.phone}"></td><td th:text="${p.address}"></td><td><a th:href="@{/patients/edit/{id}(id=${p.id})}">Edit</a> | <a class="danger" th:href="@{/patients/delete/{id}(id=${p.id})}" onclick="return confirm('Delete this patient?')">Delete</a></td></tr>
+<tr th:if="${#lists.isEmpty(patients)}"><td colspan="7" class="empty">No patients added yet.</td></tr></tbody></table></div></main></div></body></html>

@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <h2>CarePoint Hospital</h2>
+    <span>Book Appointment</span>
+</header>
+
+<main class="form-page">
+    <div class="panel form-panel">
+        <h1>Book Appointment</h1>
+
+        <form th:action="@{/appointments/save}"
+              th:object="${appointment}" method="post">
+
+            <label>Patient</label>
+            <select th:field="*{patient}" required>
+                <option value="">Select patient</option>
+                <option th:each="p : ${patients}"
+                        th:value="${p.id}"
+                        th:text="${p.name}">
+                </option>
+            </select>
+
+            <label>Doctor</label>
+            <select th:field="*{doctor}" required>
+                <option value="">Select doctor</option>
+                <option th:each="d : ${doctors}"
+                        th:value="${d.id}"
+                        th:text="${d.name + ' - ' + d.specialization}">
+                </option>
+            </select>
+
+            <label>Appointment date</label>
+            <input type="date" th:field="*{appointmentDate}" required>
+
+            <label>Appointment time</label>
+            <input type="time" th:field="*{appointmentTime}" required>
+
+            <label>Status</label>
+            <select th:field="*{status}">
+                <option value="BOOKED">BOOKED</option>
+                <option value="COMPLETED">COMPLETED</option>
+                <option value="CANCELLED">CANCELLED</option>
+            </select>
+
+            <div class="form-actions">
+                <button class="btn" type="submit">Save Appointment</button>
+                <a class="btn secondary" th:href="@{/appointments}">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

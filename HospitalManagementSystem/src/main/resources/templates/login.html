@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Login - CarePoint Hospital</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body class="login-body">
+<div class="login-card">
+    <div class="login-mark">✚</div>
+    <h1>CarePoint Hospital</h1><p class="muted">Administrator sign in</p>
+    <div class="alert error" th:if="${param.error}">Invalid username or password.</div>
+    <div class="alert success" th:if="${param.logout}">You have been logged out.</div>
+    <form th:action="@{/login}" method="post">
+        <label>Username</label><input type="text" name="username" required autofocus>
+        <label>Password</label><input type="password" name="password" required>
+        <button class="btn login-btn" type="submit">Sign In</button>
+    </form>
+    <p class="login-help">Demo: admin / Admin@123</p>
+</div>
+</body></html>

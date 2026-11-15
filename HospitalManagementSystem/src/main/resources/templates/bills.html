@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Billing</title><link rel="stylesheet" th:href="@{/css/style.css}"></head><body>
+<header class="topbar"><h2>CarePoint Hospital</h2><span>Billing Management</span></header><div class="layout"><nav class="sidebar"><a th:href="@{/}">Dashboard</a><a th:href="@{/patients}">Patients</a><a th:href="@{/doctors}">Doctors</a><a th:href="@{/appointments}">Appointments</a><a class="active" th:href="@{/bills}">Billing</a></nav>
+<main class="content"><div class="heading"><div><h1>Billing</h1><p class="muted">Create and track bills</p></div><a class="btn" th:href="@{/bills/new}">+ Create Bill</a></div>
+<div class="panel table-wrap"><table><thead><tr><th>ID</th><th>Patient</th><th>Description</th><th>Amount</th><th>Date</th><th>Payment</th><th>Action</th></tr></thead><tbody>
+<tr th:each="b : ${bills}"><td th:text="${b.id}"></td><td th:text="${b.patient.name}"></td><td th:text="${b.description}"></td><td th:text="${b.amount}"></td><td th:text="${b.billDate}"></td><td th:text="${b.paymentStatus}"></td><td><a class="danger" th:href="@{/bills/delete/{id}(id=${b.id})}" onclick="return confirm('Delete this bill?')">Delete</a></td></tr>
+<tr th:if="${#lists.isEmpty(bills)}"><td colspan="7" class="empty">No bills created yet.</td></tr></tbody></table></div></main></div></body></html>

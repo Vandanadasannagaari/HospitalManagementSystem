@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Appointments</title><link rel="stylesheet" th:href="@{/css/style.css}"></head><body>
+<header class="topbar"><h2>CarePoint Hospital</h2><span>Appointment Management</span></header><div class="layout"><nav class="sidebar"><a th:href="@{/}">Dashboard</a><a th:href="@{/patients}">Patients</a><a th:href="@{/doctors}">Doctors</a><a class="active" th:href="@{/appointments}">Appointments</a><a th:href="@{/bills}">Billing</a></nav>
+<main class="content"><div class="heading"><div><h1>Appointments</h1><p class="muted">Schedule patient visits</p></div><a class="btn" th:href="@{/appointments/new}">+ Book Appointment</a></div>
+<div class="panel table-wrap"><table><thead><tr><th>ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th><th>Action</th></tr></thead><tbody>
+<tr th:each="a : ${appointments}"><td th:text="${a.id}"></td><td th:text="${a.patient.name}"></td><td th:text="${a.doctor.name}"></td><td th:text="${a.appointmentDate}"></td><td th:text="${a.appointmentTime}"></td><td th:text="${a.status}"></td><td><a class="danger" th:href="@{/appointments/delete/{id}(id=${a.id})}" onclick="return confirm('Delete this appointment?')">Delete</a></td></tr>
+<tr th:if="${#lists.isEmpty(appointments)}"><td colspan="7" class="empty">No appointments booked yet.</td></tr></tbody></table></div></main></div></body></html>

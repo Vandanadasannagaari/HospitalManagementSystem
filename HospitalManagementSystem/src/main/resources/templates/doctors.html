@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Doctors</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <header class="topbar">
+        <h2>CarePoint Hospital</h2>
+        <span>Doctor Management</span>
+    </header>
+
+    <div class="layout">
+
+        <nav class="sidebar">
+            <a th:href="@{/}">Dashboard</a>
+            <a th:href="@{/patients}">Patients</a>
+            <a class="active" th:href="@{/doctors}">Doctors</a>
+            <a th:href="@{/appointments}">Appointments</a>
+            <a th:href="@{/bills}">Billing</a>
+        </nav>
+
+        <main class="content">
+
+            <div class="heading">
+                <div>
+                    <h1>Doctors</h1>
+                    <p class="muted">Manage doctor records</p>
+                </div>
+
+                <a class="btn" th:href="@{/doctors/new}">
+                    + Add Doctor
+                </a>
+            </div>
+
+            <div class="panel table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Specialization</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="d : ${doctors}">
+                            <td th:text="${d.id}"></td>
+                            <td th:text="${d.name}"></td>
+                            <td th:text="${d.specialization}"></td>
+                            <td th:text="${d.phone}"></td>
+                            <td th:text="${d.email}"></td>
+                            <td>
+                                <a th:href="@{/doctors/edit/{id}(id=${d.id})}">
+                                    Edit
+                                </a>
+                                |
+                                <a class="danger"
+                                   th:href="@{/doctors/delete/{id}(id=${d.id})}"
+                                   onclick="return confirm('Delete this doctor?')">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr th:if="${#lists.isEmpty(doctors)}">
+                            <td colspan="6" class="empty">
+                                No doctors added yet.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>

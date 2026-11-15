@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Patient Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <header class="topbar">
+        <h2>CarePoint Hospital</h2>
+        <span>Patient Registration</span>
+    </header>
+
+    <main class="form-page">
+        <div class="panel form-panel">
+
+            <h1 th:text="${patient.id == null ? 'Register Patient' : 'Update Patient'}">
+                Register Patient
+            </h1>
+
+            <form th:action="@{/patients/save}" th:object="${patient}" method="post">
+
+                <input type="hidden" th:field="*{id}">
+
+                <label>Full name</label>
+                <input type="text" th:field="*{name}"
+                       placeholder="Enter patient name" required>
+
+                <label>Age</label>
+                <input type="number" th:field="*{age}"
+                       min="0" max="120" required>
+
+                <label>Gender</label>
+                <select th:field="*{gender}" required>
+                    <option value="">Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Phone</label>
+                <input type="text" th:field="*{phone}"
+                       placeholder="Phone number" required>
+
+                <label>Address</label>
+                <textarea th:field="*{address}" rows="3"
+                          placeholder="Patient address"></textarea>
+
+                <div class="form-actions">
+                    <button class="btn" type="submit">Save Patient</button>
+                    <a class="btn secondary" th:href="@{/patients}">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>
